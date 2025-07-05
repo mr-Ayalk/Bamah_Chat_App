@@ -36,7 +36,11 @@ export const useAuthStore = create((set, get) => ({
       toast.success("Account created successfully");
       get().connectSocket();
     } catch (error) {
-      toast.error(error.response.data.message);
+     toast.error(
+  error?.response?.data?.message ||
+  error?.message ||
+  "An unexpected error occurred"
+);
     } finally {
       set({ isSigningUp: false });
     }
@@ -51,7 +55,11 @@ export const useAuthStore = create((set, get) => ({
 
       get().connectSocket();
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(
+  error?.response?.data?.message ||
+  error?.message ||
+  "An unexpected error occurred"
+);
     } finally {
       set({ isLoggingIn: false });
     }
@@ -64,7 +72,11 @@ export const useAuthStore = create((set, get) => ({
       toast.success("Logged out successfully");
       get().disconnectSocket();
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(
+  error?.response?.data?.message ||
+  error?.message ||
+  "An unexpected error occurred"
+);
     }
   },
 
@@ -76,7 +88,11 @@ export const useAuthStore = create((set, get) => ({
       toast.success("Profile updated successfully");
     } catch (error) {
       console.log("error in update profile:", error);
-      toast.error(error.response.data.message);
+      toast.error(
+  error?.response?.data?.message ||
+  error?.message ||
+  "An unexpected error occurred"
+);
     } finally {
       set({ isUpdatingProfile: false });
     }
